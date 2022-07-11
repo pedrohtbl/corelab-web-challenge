@@ -1,12 +1,22 @@
+import { CustomInput, Div } from "./style";
+import { FiSearch } from "react-icons/fi"
+
 interface ISearch {
   placeholder: string;
-  value: string;
-  onChange: () => void;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  inputFilter: () => void
 }
 
-const Search = (props: ISearch) => {
+const Search = ({placeholder,setSearch,inputFilter}: ISearch) => {
   return (
-    <input type="text" placeholder={props.placeholder} value={props.value} />
+    <Div>
+      <FiSearch onClick={inputFilter}/>
+      <CustomInput type="text" placeholder={placeholder} onChange={(e) =>{
+         setSearch(e.target.value.toLowerCase())
+         inputFilter()
+      }} 
+      />
+    </Div>
   );
 };
 
